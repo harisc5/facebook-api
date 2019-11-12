@@ -12,7 +12,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="facebookapi" options="-parameters" />
+      <module name="facebookapi" options="" />
     </option>
   </component>
 </project>
