@@ -9,34 +9,26 @@ import org.springframework.social.facebook.api.Place;
 import org.springframework.social.facebook.api.User;
 import org.springframework.social.facebook.api.impl.FacebookTemplate;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/")
+@CrossOrigin
 public class FbController {
 
     private FacebookService facebookService;
+    private ConnectionRepository connectionRepository;
 
-    public FbController(FacebookService facebookService) {
+    public FbController(FacebookService facebookService, ConnectionRepository connectionRepository) {
         this.facebookService = facebookService;
+        this.connectionRepository = connectionRepository;
     }
 
-    @GetMapping
-    public List<String> welcome() {
-        List<String> urls = new ArrayList<String>();
-        urls.add("localhost:8080/authorize");
-        urls.add("localhost:8080/getData");
-
-        return urls;
-    }
-
-    @GetMapping("/authorize")
+    @GetMapping("/")
     public String generateAuthorization() {
         return facebookService.generateAuthorization();
     }
