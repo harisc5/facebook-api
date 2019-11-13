@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserData} from "../types/user-data/user-data";
 import {HttpService} from "../service/http-service/http-service";
 import {Uri} from "../types/uri/uri";
@@ -10,15 +10,17 @@ import {Uri} from "../types/uri/uri";
 })
 export class FbDataComponent implements OnInit {
 
-  private columnsToDisplay = ['ID', 'NAME', 'GENDER','BIRTHDAY','LOCATION'];
+  private columnsToDisplay = ['ID', 'NAME', 'GENDER', 'BIRTHDAY', 'LOCATION'];
   private fbUserData: UserData[] = [];
-  private authUri: Uri;
+  private authUri: string;
 
 
-  constructor(private httpService: HttpService) { }
+  constructor(private httpService: HttpService) {
+  }
 
   ngOnInit() {
     this.authenticate();
+    this.getData();
   }
 
   authenticate() {
@@ -26,11 +28,27 @@ export class FbDataComponent implements OnInit {
     return this.httpService
       .get("http://localhost:8080")
       .subscribe(response => {
+        this.authUri = response.toString();
+      }, error => {
+        console.log(error.error);
+      });
+  }
+
+  getData(){
+    return this.httpService
+      .get("http://localhost:8080/getData")
+      .subscribe(response=>{
+        this.fbUserData = [];
         const results = Array.isArray(response) ? Array.from(response) : [];
-        this.authUri = results[0];
-      })
+        console.log(results);
+        if (results.length > 0) {
+          for (const obj of results) {
+            this.fbUserData.push(obj);
+          }
+        }
+      }, error => {
+        console.log(error.error);
+      });
   }
 }
 
-
-//$scope.tmp = angular.fromJson($scope.text);

@@ -1,11 +1,14 @@
 package application.service;
 
+import netscape.javascript.JSObject;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.impl.FacebookTemplate;
 import org.springframework.social.facebook.connect.FacebookConnectionFactory;
 import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 @Service
 public class FacebookServiceImpl implements FacebookService {
@@ -24,9 +27,11 @@ public class FacebookServiceImpl implements FacebookService {
     @Override
     public String generateAuthorization() {
         OAuth2Parameters parameters = new OAuth2Parameters();
-        parameters.setRedirectUri("http://localhost:8080/getToken");
+        parameters.setRedirectUri("http://localhost:8080/getData");
         parameters.setScope("email");
+
         return createConnection().getOAuthOperations().buildAuthenticateUrl(parameters);
+
     }
 
     @Override
