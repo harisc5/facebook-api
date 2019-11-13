@@ -1,4 +1,4 @@
-package application;
+package application.controller;
 
 import application.service.FacebookService;
 import org.json.JSONObject;
@@ -41,13 +41,13 @@ public class FbController {
         return facebookService.generateAuthorization();
     }
 
-    @GetMapping("/facebook")
+    @GetMapping("/getToken")
     public void generateAccessToken(@RequestParam("code") String token) {
         facebookService.generateAccessToken(token);
     }
 
     @GetMapping("/getData")
-    public String getData() {
+    public String getUserData() {
         return facebookService.getData();
     }
 }
