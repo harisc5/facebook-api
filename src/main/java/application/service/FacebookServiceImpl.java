@@ -1,11 +1,19 @@
 package application.service;
 
+import application.model.UserData;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.JsonArray;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.social.facebook.api.Facebook;
+import org.springframework.social.facebook.api.PagedList;
+import org.springframework.social.facebook.api.Post;
 import org.springframework.social.facebook.api.impl.FacebookTemplate;
 import org.springframework.social.facebook.connect.FacebookConnectionFactory;
 import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+
+import java.io.IOException;
 
 @Service
 public class FacebookServiceImpl implements FacebookService {
@@ -37,9 +45,12 @@ public class FacebookServiceImpl implements FacebookService {
     }
 
     @Override
-    public String getData() {
+    public UserData getData() throws IOException {
         Facebook facebook = new FacebookTemplate(access_token);
-        String[] fields = {"id", "name", "gender","birthday","location"};
-        return facebook.fetchObject("me", String.class, fields);
+        String[] fields = {"id", "name", "gender", "birthday", "location"};
+        ObjectMapper objectMapper = new ObjectMapper();
+        UserData userData = objectMapper.readValue(facebook.fetchObject("me", String.class, fields), UserData.class);
+
+        return userData;
     }
 }

@@ -1,11 +1,14 @@
 package application.service;
 
-import org.json.JSONObject;
+import application.model.UserData;
+import org.springframework.ui.Model;
+
+import java.io.IOException;
 
 public interface FacebookService {
      String generateAuthorization();
 
      void generateAccessToken(String code);
 
-     String getData();
+     UserData getData() throws IOException;
 }
