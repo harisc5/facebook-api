@@ -27,7 +27,7 @@ public class FacebookServiceImpl implements FacebookService {
     @Override
     public String generateAuthorization() {
         OAuth2Parameters parameters = new OAuth2Parameters();
-        parameters.setRedirectUri("http://localhost:8080/getData");
+        parameters.setRedirectUri("http://localhost:8080/getToken");
         parameters.setScope("email");
 
         return createConnection().getOAuthOperations().buildAuthenticateUrl(parameters);

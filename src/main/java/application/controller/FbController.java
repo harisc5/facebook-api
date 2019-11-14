@@ -2,6 +2,8 @@ package application.controller;
 
 import application.service.FacebookService;
 import org.json.JSONObject;
+import org.springframework.social.connect.ConnectionRepository;
+import org.springframework.social.facebook.api.Facebook;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -9,20 +11,24 @@ import org.springframework.web.bind.annotation.*;
 public class FbController {
 
     private FacebookService facebookService;
+    private ConnectionRepository connectionRepository;
 
-    public FbController(FacebookService facebookService) {
+    public FbController(FacebookService facebookService, ConnectionRepository connectionRepository) {
         this.facebookService = facebookService;
+        this.connectionRepository = connectionRepository;
     }
 
     @GetMapping("/")
     public String generateAuthorization() {
-        return facebookService.generateAuthorization();
+        if(connectionRepository.findPrimaryConnection(Facebook.class) == null){
+            return facebookService.generateAuthorization();
+        }
+        return facebookService.getData();
     }
 
     @GetMapping("/getToken")
-    public String generateAccessToken(@RequestParam("code") String token) {
+    public void generateAccessToken(@RequestParam("code") String token) {
         facebookService.generateAccessToken(token);
-        return "index";
     }
 
     @GetMapping("/getData")
