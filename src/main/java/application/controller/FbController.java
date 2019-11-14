@@ -2,8 +2,12 @@ package application.controller;
 
 import application.model.UserData;
 import application.service.FacebookService;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @RestController
@@ -18,13 +22,15 @@ public class FbController {
     }
 
     @GetMapping("/")
-    public String generateAuthorization() {
-        return facebookService.generateAuthorization();
+    public void generateAuthorization(HttpServletResponse response) throws IOException {
+       response.sendRedirect(facebookService.generateAuthorization());
     }
 
     @GetMapping("/getToken")
-    public void generateAccessToken(@RequestParam("code") String token) {
+    public void generateAccessToken(@RequestParam("code") String token, HttpServletResponse response) throws IOException {
         facebookService.generateAccessToken(token);
+
+        response.sendRedirect("/getData");
     }
 
     @GetMapping("/getData")
