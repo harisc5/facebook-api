@@ -1,38 +1,40 @@
 package application.controller;
 
+import application.model.UserData;
 import application.service.FacebookService;
-import org.json.JSONObject;
-import org.springframework.social.connect.ConnectionRepository;
-import org.springframework.social.facebook.api.Facebook;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @RestController
 @CrossOrigin
 public class FbController {
 
     private FacebookService facebookService;
-    private ConnectionRepository connectionRepository;
 
-    public FbController(FacebookService facebookService, ConnectionRepository connectionRepository) {
+
+    public FbController(FacebookService facebookService) {
         this.facebookService = facebookService;
-        this.connectionRepository = connectionRepository;
     }
 
     @GetMapping("/")
-    public String generateAuthorization() {
-        if(connectionRepository.findPrimaryConnection(Facebook.class) == null){
-            return facebookService.generateAuthorization();
-        }
-        return facebookService.getData();
+    public void generateAuthorization(HttpServletResponse response) throws IOException {
+       response.sendRedirect(facebookService.generateAuthorization());
     }
 
     @GetMapping("/getToken")
-    public void generateAccessToken(@RequestParam("code") String token) {
+    public void generateAccessToken(@RequestParam("code") String token, HttpServletResponse response) throws IOException {
         facebookService.generateAccessToken(token);
+
+        response.sendRedirect("/getData");
     }
 
     @GetMapping("/getData")
-    public String getUserData() {
+    public UserData getUserData() throws IOException {
         return facebookService.getData();
     }
 }
