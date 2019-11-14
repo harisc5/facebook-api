@@ -1,7 +1,6 @@
 export class UserData {
-  id: number;
+  id: string;
   name: string;
   gender: string;
   birthday: string;
-  location: string;
 }

@@ -1,23 +1,29 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppComponent } from './app.component';
-import { FbDataComponent } from './fb-data/fb-data.component';
+import {AppComponent} from './app.component';
+import {FbDataComponent} from './fb-data/fb-data.component';
 import {RouterModule} from "@angular/router";
 import {HttpClientModule} from "@angular/common/http";
 import {HttpService} from "./service/http-service/http-service";
+import {FbLoginComponent} from './fb-login/fb-login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FbDataComponent
+    FbDataComponent,
+    FbLoginComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot([
       {
         path: '',
-        component:FbDataComponent
+        component: FbLoginComponent
+      },
+      {
+        path: 'fb/data',
+        component: FbDataComponent
       }
     ]),
     HttpClientModule
@@ -25,4 +31,5 @@ import {HttpService} from "./service/http-service/http-service";
   providers: [HttpService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

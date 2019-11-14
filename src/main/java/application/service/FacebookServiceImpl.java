@@ -13,6 +13,7 @@ import java.io.IOException;
 
 @Service
 public class FacebookServiceImpl implements FacebookService {
+    @Value("${application.access-token}")
     private String access_token;
 
     @Value("${spring.social.facebook.app-id}")
@@ -43,7 +44,7 @@ public class FacebookServiceImpl implements FacebookService {
     @Override
     public UserData getData() throws IOException {
         Facebook facebook = new FacebookTemplate(access_token);
-        String[] fields = {"id", "name", "gender", "birthday", "location"};
+        String[] fields = {"id", "name", "gender", "birthday"};
         ObjectMapper objectMapper = new ObjectMapper();
         UserData userData = objectMapper.readValue(facebook.fetchObject("me", String.class, fields), UserData.class);
 

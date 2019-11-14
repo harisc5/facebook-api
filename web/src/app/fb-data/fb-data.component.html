@@ -1,4 +1,17 @@
 <div>
-  <h3>Please log in to your facebook account.</h3>
-  <button (click)="authenticate()">FB LOGIN</button>
+  <h3>Thank you. You are now connected</h3>
+  <p>Please click the button below to view data</p>
+  <button (click)="getData()">DISPLAY</button>
+
+  <table *ngIf="displayData">
+    <tr>
+      <td *ngFor="let column of columnsToDisplay">{{column}}</td>
+    </tr>
+    <tr>
+      <td >{{fbUserData[0]}}</td>
+      <td >{{fbUserData[1]}}</td>
+      <td >{{fbUserData[2]}}</td>
+      <td >{{fbUserData[3]}}</td>
+    </tr>
+  </table>
 </div>
