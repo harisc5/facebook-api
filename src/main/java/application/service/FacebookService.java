@@ -10,5 +10,5 @@ public interface FacebookService {
 
     void generateAccessToken(String code);
 
-    UserData getData() throws IOException;
+    UserData getData();
 }

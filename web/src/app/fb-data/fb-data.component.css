@@ -1,6 +1,7 @@
-.table-div{
+.padding-div {
   padding-top: 50px;
 }
+
 .disabled {
   color: darkgrey
 }
@@ -87,6 +88,13 @@
   display: block;
   z-index: 90;
 }
-.position-x{
+
+.position-x {
   float: right;
+}
+
+.display-button {
+  background-color: rgba(41, 128, 185, 0.8);
+  color: white;
+  max-width: 10%;
 }

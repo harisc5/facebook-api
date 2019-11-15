@@ -1,5 +1,8 @@
-<div>
-  <div class="table-div">
+<div class="padding-div">
+  <button class="display-button" (click)="getData()">
+    DISPLAY
+  </button>
+  <div *ngIf="displayData" class="padding-div">
     <h3>Welcome</h3>
     <table class="table table-bordered table-hover">
       <thead class="panel-heading-clearfix">
@@ -74,7 +77,7 @@
                    class="form-control">
           </div>
         </div>
-        <button class="col-sm-3 btn-save" id="download">
+        <button class="col-sm-3 btn-save" (click)="writeFile()">
           SAVE
         </button>
       </form>

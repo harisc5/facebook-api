@@ -1,19 +1,25 @@
 @import "~bootstrap";
+
 body {
   padding-bottom: 100px;
-  background-color: azure;
+  background-color: rgb(255, 204, 102);
 }
 
 table {
   text-align: center;
-  background-color: lightgoldenrodyellow;
+  background-color: gray;
 }
+
 .panel-body {
   padding-top: 15px;
 }
 
 .table thead, .table thead th {
   text-align: center;
+
+}
+.table tbody td{
+  color:white;
 }
 
 .input-size {
@@ -24,11 +30,13 @@ table {
 .container {
   width: 80%;
 }
-.btn-primary{
+
+.btn-primary {
   max-width: 50%;
   background-color: rgba(41, 128, 185, 0.8);
 }
-.btn-save{
+
+.btn-save {
   max-width: 100%;
   background-color: rgba(41, 128, 185, 0.8);
   color: white;

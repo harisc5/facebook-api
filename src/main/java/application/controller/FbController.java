@@ -2,9 +2,7 @@ package application.controller;
 
 import application.model.UserData;
 import application.service.FacebookService;
-import com.google.gson.JsonObject;
-import org.springframework.social.facebook.api.User;
-import org.springframework.ui.Model;
+import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -26,7 +24,7 @@ public class FbController {
 
     @GetMapping("/")
     public void generateAuthorization(HttpServletResponse response) throws IOException {
-       response.sendRedirect(facebookService.generateAuthorization());
+        response.sendRedirect(facebookService.generateAuthorization());
     }
 
     @GetMapping("/getToken")
@@ -35,6 +33,7 @@ public class FbController {
 
         return "Thank you. You can close this windows now.";
     }
+
     @GetMapping("/getData")
     public List<UserData> getUserData() throws IOException {
         List<UserData> userDataList = Collections.singletonList(facebookService.getData());
@@ -42,8 +41,9 @@ public class FbController {
     }
 
     @PostMapping("/write")
-    public void writeFileToDisk(Object jsonObject) throws IOException {
-       FileWriter file = new FileWriter("/Users/Haris/Desktop/file1.txt");
-            file.write(String.valueOf(jsonObject));
+    public void writeFileToDisk(@RequestBody UserData userData) throws IOException {
+        FileWriter file = new FileWriter("/Users/38761/Desktop/file1.json");
+        file.write(String.valueOf(JSONObject.wrap(userData)));
+        file.close();
     }
 }
