@@ -1,0 +1,87 @@
+<div class="padding-div">
+  <button class="display-button" (click)="getData()">
+    DISPLAY
+  </button>
+  <div *ngIf="displayData" class="padding-div">
+    <h3>Welcome</h3>
+    <table class="table table-bordered table-hover">
+      <thead class="panel-heading-clearfix">
+      <tr>
+        <th *ngFor="let column of columnsToDisplay">{{column}}</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of fbUserData">
+        <td>{{item.id}}</td>
+        <td>{{item.name}}</td>
+        <td>{{item.gender}}</td>
+        <td>{{item.birthday}}</td>
+        <td>
+          <button class="col-sm-3 btn-primary" (click)="openModal(item)">
+            EDIT
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div *ngIf="displayEditModal">
+  <div class="modal"></div>
+  <div class="dialog">
+    <div class="dialog-header">
+      <button type="button" class="position-x" aria-label="Close dialog" (click)="closeModal()"><span
+        aria-hidden="true">&times;</span>
+      </button>
+      <p class="dialog-title">
+        Edit FB data
+      </p>
+    </div>
+    <div class="dialog-body">
+      <form [formGroup]="fbDataForm">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="id"> ID</label>
+            <input id="id" name="id" formControlName="id"
+                   [ngModel]="editData.id"
+                   label="numberResourceConfigId" placeholder="Enter id" type="input"
+                   class="form-control" readonly>
+          </div>
+        </div>
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="name"> NAME</label>
+            <input id="name" name="id" formControlName="name"
+                   [ngModel]="editData.name"
+                   label="name" placeholder="Enter name" type="input"
+                   class="form-control">
+          </div>
+        </div>
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="gender"> GENDER</label>
+            <input id="gender" name="gender" formControlName="gender"
+                   [ngModel]="editData.gender"
+                   label="name" placeholder="Enter gender" type="input"
+                   class="form-control">
+          </div>
+        </div>
+
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="birthday"> BITRHDAY</label>
+            <input id="birthday" name="birthday" formControlName="birthday"
+                   [ngModel]="editData.birthday"
+                   label="birthday" placeholder="Enter birthday" type="input"
+                   class="form-control">
+          </div>
+        </div>
+        <button class="col-sm-3 btn-save" (click)="writeFile()">
+          SAVE
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+

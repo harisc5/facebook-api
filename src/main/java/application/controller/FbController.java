@@ -1,53 +1,49 @@
 package application.controller;
 
+import application.model.UserData;
 import application.service.FacebookService;
 import org.json.JSONObject;
-import org.springframework.social.connect.Connection;
-import org.springframework.social.connect.ConnectionRepository;
-import org.springframework.social.facebook.api.Facebook;
-import org.springframework.social.facebook.api.Place;
-import org.springframework.social.facebook.api.User;
-import org.springframework.social.facebook.api.impl.FacebookTemplate;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import javax.servlet.http.HttpServletResponse;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
-@RequestMapping("/")
+@CrossOrigin
 public class FbController {
 
     private FacebookService facebookService;
+
 
     public FbController(FacebookService facebookService) {
         this.facebookService = facebookService;
     }
 
-    @GetMapping
-    public List<String> welcome() {
-        List<String> urls = new ArrayList<String>();
-        urls.add("localhost:8080/authorize");
-        urls.add("localhost:8080/getData");
-
-        return urls;
-    }
-
-    @GetMapping("/authorize")
-    public String generateAuthorization() {
-        return facebookService.generateAuthorization();
+    @GetMapping("/")
+    public void generateAuthorization(HttpServletResponse response) throws IOException {
+        response.sendRedirect(facebookService.generateAuthorization());
     }
 
     @GetMapping("/getToken")
-    public void generateAccessToken(@RequestParam("code") String token) {
+    public String generateAccessToken(@RequestParam("code") String token, HttpServletResponse response) throws IOException {
         facebookService.generateAccessToken(token);
+
+        return "Thank you. You can close this windows now.";
     }
 
     @GetMapping("/getData")
-    public String getUserData() {
-        return facebookService.getData();
+    public List<UserData> getUserData() throws IOException {
+        List<UserData> userDataList = Collections.singletonList(facebookService.getData());
+        return userDataList;
+    }
+
+    @PostMapping("/write")
+    public void writeFileToDisk(@RequestBody UserData userData) throws IOException {
+        FileWriter file = new FileWriter("/Users/38761/Desktop/file1.json");
+        file.write(String.valueOf(JSONObject.wrap(userData)));
+        file.close();
     }
 }

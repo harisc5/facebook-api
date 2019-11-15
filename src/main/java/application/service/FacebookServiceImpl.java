@@ -1,5 +1,6 @@
 package application.service;
 
+import application.model.UserData;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.impl.FacebookTemplate;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class FacebookServiceImpl implements FacebookService {
+
     private String access_token;
 
     @Value("${spring.social.facebook.app-id}")
@@ -37,9 +39,11 @@ public class FacebookServiceImpl implements FacebookService {
     }
 
     @Override
-    public String getData() {
+    public UserData getData() {
         Facebook facebook = new FacebookTemplate(access_token);
-        String[] fields = {"id", "name", "gender","birthday","location"};
-        return facebook.fetchObject("me", String.class, fields);
+        String[] fields = {"id", "name", "gender", "birthday"};
+        UserData userData = facebook.fetchObject("me", UserData.class, fields);
+
+        return userData;
     }
 }
