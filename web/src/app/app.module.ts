@@ -7,6 +7,7 @@ import {RouterModule} from "@angular/router";
 import {HttpClientModule} from "@angular/common/http";
 import {HttpService} from "./service/http-service/http-service";
 import {FbLoginComponent} from './fb-login/fb-login.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {FbLoginComponent} from './fb-login/fb-login.component';
         component: FbDataComponent
       }
     ]),
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [HttpService],
   bootstrap: [AppComponent]

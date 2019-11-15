@@ -13,7 +13,7 @@ import java.io.IOException;
 
 @Service
 public class FacebookServiceImpl implements FacebookService {
-    @Value("${application.access-token}")
+
     private String access_token;
 
     @Value("${spring.social.facebook.app-id}")

@@ -2,14 +2,16 @@ package application.controller;
 
 import application.model.UserData;
 import application.service.FacebookService;
+import com.google.gson.JsonObject;
 import org.springframework.social.facebook.api.User;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -34,9 +36,14 @@ public class FbController {
         return "Thank you. You can close this windows now.";
     }
     @GetMapping("/getData")
-    public UserData getUserData() throws IOException {
-        UserData userData =  facebookService.getData();
+    public List<UserData> getUserData() throws IOException {
+        List<UserData> userDataList = Collections.singletonList(facebookService.getData());
+        return userDataList;
+    }
 
-        return userData;
+    @PostMapping("/write")
+    public void writeFileToDisk(Object jsonObject) throws IOException {
+       FileWriter file = new FileWriter("/Users/Haris/Desktop/file1.txt");
+            file.write(String.valueOf(jsonObject));
     }
 }
