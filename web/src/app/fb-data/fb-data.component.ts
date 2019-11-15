@@ -10,7 +10,8 @@ import {Uri} from "../types/uri/uri";
 })
 export class FbDataComponent implements OnInit {
 
-  private columnsToDisplay = ['ID', 'NAME', 'GENDER', 'BIRTHDAY', 'LOCATION'];
+  private columnsToDisplay = ['ID', 'NAME', 'GENDER', 'BIRTHDAY'];
+  private displayData: boolean;
   private fbUserData: UserData[] = [];
   private authUri: string;
 
@@ -19,15 +20,18 @@ export class FbDataComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authenticate();
   }
 
-  authenticate() {
-    return this.httpService.get("localhost:8080")
+  getData(){
+    this.displayData = true;
+    return this.httpService
+      .get("http://localhost:8080/getData")
       .subscribe(response =>{
-        console.log(response);
+        this.fbUserData = Object.values(response);
+        console.log(this.fbUserData);
+      }, error => {
+        console.log(error.error);
       });
   }
-
 }
 

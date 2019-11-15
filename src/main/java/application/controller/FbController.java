@@ -2,6 +2,7 @@ package application.controller;
 
 import application.model.UserData;
 import application.service.FacebookService;
+import org.springframework.social.facebook.api.User;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,14 +28,15 @@ public class FbController {
     }
 
     @GetMapping("/getToken")
-    public void generateAccessToken(@RequestParam("code") String token, HttpServletResponse response) throws IOException {
+    public String generateAccessToken(@RequestParam("code") String token, HttpServletResponse response) throws IOException {
         facebookService.generateAccessToken(token);
 
-        response.sendRedirect("/getData");
+        return "Thank you. You can close this windows now.";
     }
-
     @GetMapping("/getData")
     public UserData getUserData() throws IOException {
-        return facebookService.getData();
+        UserData userData =  facebookService.getData();
+
+        return userData;
     }
 }

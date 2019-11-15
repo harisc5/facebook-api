@@ -9,5 +9,4 @@ public class UserData {
     String name;
     String gender;
     String birthday;
-    JsonNode location;
 }
