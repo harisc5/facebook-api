@@ -19,16 +19,15 @@ export class FbDataComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getData();
+    this.authenticate();
   }
 
   authenticate() {
-    window.open("http://localhost:8080");
-    this.getData();
+    return this.httpService.get("localhost:8080")
+      .subscribe(response =>{
+        console.log(response);
+      });
   }
 
-  getData(){
-
-  }
 }
 
