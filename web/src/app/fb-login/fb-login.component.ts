@@ -9,11 +9,10 @@ import {Router} from "@angular/router";
 })
 export class FbLoginComponent implements OnInit {
 
-  constructor(private httpService: HttpService, private router: Router) {
+  constructor(private router: Router) {
   }
 
   ngOnInit() {
-
   }
 
   fbLogin() {

@@ -43,6 +43,7 @@ export class FbDataComponent implements OnInit {
         console.log(this.fbUserData);
       }, error => {
         console.log(error.error);
+        alert("An error occured please try later");
       });
   }
 
@@ -64,6 +65,5 @@ export class FbDataComponent implements OnInit {
         this.fbUserData[0] = this.fbDataForm.value;
       });
   }
-
 }
 

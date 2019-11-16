@@ -1,9 +1,9 @@
 <div class="padding-div">
-  <button class="display-button" (click)="getData()">
+  <button class="btn-primary" (click)="getData()">
     DISPLAY
   </button>
   <div *ngIf="displayData" class="padding-div">
-    <h3>Welcome</h3>
+    <h3>Welcome {{fbUserData[0].name}}</h3>
     <table class="table table-bordered table-hover">
       <thead class="panel-heading-clearfix">
       <tr>

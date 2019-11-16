@@ -34,7 +34,7 @@ public class FbController {
     }
 
     @GetMapping("/getData")
-    public List<UserData> getUserData() throws IOException {
+    public List<UserData> getUserData(){
         List<UserData> userDataList = Collections.singletonList(facebookService.getData());
         return userDataList;
     }

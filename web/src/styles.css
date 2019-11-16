@@ -1,13 +1,12 @@
 @import "~bootstrap";
 
 body {
-  padding-bottom: 100px;
-  background-color: rgb(255, 204, 102);
+  background-color: #7575a3;
 }
 
 table {
   text-align: center;
-  background-color: gray;
+  background-color: #ff3333;
 }
 
 .panel-body {
@@ -18,13 +17,9 @@ table {
   text-align: center;
 
 }
-.table tbody td{
-  color:white;
-}
 
-.input-size {
-  height: 25px;
-  width: 250px;
+.table tbody td {
+  color: white;
 }
 
 .container {
@@ -33,7 +28,6 @@ table {
 
 .btn-primary {
   max-width: 50%;
-  background-color: rgba(41, 128, 185, 0.8);
 }
 
 .btn-save {
@@ -41,3 +35,8 @@ table {
   background-color: rgba(41, 128, 185, 0.8);
   color: white;
 }
+
+.padding-div {
+  padding-top: 50px;
+}
+
