@@ -13,6 +13,7 @@ export class FbLoginComponent implements OnInit {
   }
 
   ngOnInit() {
+
   }
 
   fbLogin() {
