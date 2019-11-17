@@ -15,6 +15,11 @@ In order to run the application:
   3. ng serve
 4. Open localhost:4200 in your browser
 
+# Built with
+
+1. Spring Boot
+2. AngularJS
+
 # Author
 
 Haris Cehic
