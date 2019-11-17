@@ -17,8 +17,9 @@ In order to run the application:
 
 # Built with
 
-1. Spring Boot
+1. Java & Spring Boot
 2. AngularJS
+3. Bootstrap 
 
 # Author
 
