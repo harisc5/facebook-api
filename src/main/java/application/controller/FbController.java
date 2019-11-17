@@ -23,7 +23,7 @@ public class FbController {
 
     @GetMapping("/")
     public void generateAuthorization(HttpServletResponse response) throws IOException {
-        response.sendRedirect(facebookService.generateAuthorization());
+        response.sendRedirect(facebookService.generateAuthentication());
     }
 
     @GetMapping("/getToken")

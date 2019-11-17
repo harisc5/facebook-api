@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.List;
 
 public interface FacebookService {
-    String generateAuthorization();
+    String generateAuthentication();
 
     void generateAccessToken(String code);
 
