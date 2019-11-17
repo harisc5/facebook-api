@@ -1,0 +1,54 @@
+.modal {
+  background-color: #000000;
+  opacity: 0.6;
+  background-size: cover;
+  display: block;
+  z-index: 90;
+}
+
+.dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  height: auto;
+  width: 30%;
+  background-color: white;
+  border-radius: 5px;
+  padding-bottom: 20px;
+}
+
+.dialog-header {
+  background-color: rgba(41, 128, 185, 0.8);
+  border-radius: 4px 4px 0px 0px;
+}
+
+.dialog-title {
+  color: #fff;
+  padding: 10px;
+  font-size: 1.4em;
+}
+
+.dialog-body {
+  padding: 10px;
+}
+
+.close-dialog {
+  width: 55px;
+  height: 2em;
+  padding: 0px;
+  margin: 0px;
+}
+
+.modal {
+  background-color: #000000;
+  opacity: 0.6;
+  background-size: cover;
+  display: block;
+  z-index: 90;
+}
+
+.position-x {
+  float: right;
+}

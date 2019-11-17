@@ -31,7 +31,7 @@ export class FbDataComponent implements OnInit {
   getData() {
     this.displayData = true;
     return this.httpService
-      .get("http://localhost:8080/getData")
+      .get("/getData")
       .subscribe(response => {
         this.fbUserData = [];
         const results = Array.isArray(response) ? Array.from(response) : [];
@@ -43,6 +43,7 @@ export class FbDataComponent implements OnInit {
         console.log(this.fbUserData);
       }, error => {
         console.log(error.error);
+        alert("An error occured please try later");
       });
   }
 
@@ -57,13 +58,12 @@ export class FbDataComponent implements OnInit {
 
   writeFile() {
     return this.httpService
-      .post("http://localhost:8080/write", this.fbDataForm.value)
+      .post("/write", this.fbDataForm.value)
       .subscribe(response => {
         alert("File written to disk");
         this.displayEditModal = false;
         this.fbUserData[0] = this.fbDataForm.value;
       });
   }
-
 }
 
