@@ -11,7 +11,7 @@ In order to run the application:
 2. Run the Application.java
 3. Use the terminal(bash) and write: 
   1. cd web/
-  2. npm install
+  2. npm install (once)
   3. ng serve
 4. Open localhost:4200 in your browser
 
